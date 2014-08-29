@@ -1,31 +1,22 @@
 zircon
 ======
 
-Zircon is a lightweight open-source framework to intercept, store, analyze, and visualize high-speed signals in real-time using modern technologies. High-speed means thousands of messages per second and real-time means a latency of milliseconds to tens of milliseconds.
+Zircon is a lightweight framework to intercept, store, analyze, and visualize high-speed signals in real-time using modern technologies. High-speed means thousands of messages per second and real-time means a latency of milliseconds to tens of milliseconds.
+
+[Screenshot]
 
 ### Purpose
 
-Zircon is designed to capture rapid streams of data in large communication networks like CAN busses and wireless meshes. This usually means sensor and actuator signals, but can be anything that boils down to events or time-series.
+Zircon is designed to capture rapid streams of data in large communication networks like CAN busses and wireless meshes. This usually means sensor and actuator signals, but can be anything that boils down to events or time series. Zircon consists of pluggable components useful individually or as a full stack for decoding and logging, structured querying and analysis, real-time visualization, and integration into custom applications. Written in Python, with a small and elegant code base.
 
-Zircon consists of extensible components that function individually or as a full stack solution. It can be used for decoding and logging, structured querying and analysis, plug-and-play real-time diagnostics, or for creating your own native or web-based applications.
-
-Zircon is free and open-source, fast, platform-independent, easy to customize, and easy to integrate with your system. By default, Zircon uses InfluxDB for blazing-fast storage, ZeroMQ for local or remote reporting, and Socket.IO for streaming real-time data. It provides base classes and examples that can be extended to support any protocol or encoding. Really, give it a shot.
+Zircon is free and open-source, fast, platform-independent, fully extensible, and easy to integrate with your system. By default, InfluxDB is used for blazing-fast storage, ZeroMQ for local or remote reporting, and Socket.IO for real-time data streaming. It provides base classes and examples that can be extended to support any protocol or encoding.
 
 ### Application Example
 
-Steve is the lead engineer for a new hovercraft. His hovercraft contains ECUs for propulsion, sensing, power management, safety systems, and so on, which all communicate on a CAN bus. Steve's engineers spend a lot of their time monitoring and debugging the state of their respective systems and the messages they send/receive.
+Steve is the lead engineer for a new hovercraft, which contains ECUs for propulsion, steering, sensing, power, and safety systems on a CAN bus. Every day, Steve's engineers test and debug their respective systems through the messages they send and receive. The team has various expensive, bulky, archaic, and/or proprietary software options to filter and log messages, but they still spend a lot of time watching the stream and manually decoding bytes. Or worse, they pull raw data from log files, match up times, and hunt for something meaningful.
 
-The engineers have various expensive, bulky, archaic, and/or proprietary software options for monitoring the bus. What they provide is the capability to interface with the bus, filter for certain types of messages, and log data. However, the engineers end up spending a lot of time watching the stream and manually decoding their protocols. Or worse, they have to pull raw data from log files, match up times, and hunt for something meaningful.
-
-Steve installs Zircon on his laptop and writes a little code based on the provided examples. He launches the reporter and receiver processes, and pulls up the web interface. TBC.
+Steve installs Zircon on his laptop, writes a little code, and fires it up. What he instantly gets is a slick web interface to visualize all communications inside his hovercraft, in real-time. What he also gets is a powerful API to query, filter, downsample, aggregate, and export all signals for the past days or weeks. Excited, Steve sets up Zircon on a dedicated computer. His engineers start using the Zircon interface to wirelessly debug their firmware, tune the control gains, and check for voltage spikes. Soon, they create custom diagnostic dashboards, an interactive driver display, and a mobile app that can start the hovercraft by sending messages back to the bus. Productivity soars, and profit is made.
 
 ### Components
 
-+ *Sniffer* -
-+ *Decoder* -
-+ *Reader* -
-+ *Parser* -
-+ *Sender* -
-+ *Receiver* -
-+ *Decoder* -
-+ *Database* -
+### Getting Started
