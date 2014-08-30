@@ -13,9 +13,9 @@ Zircon is free and open-source, fast, platform-independent, fully extensible, an
 
 ## Application Example
 
-Steve is the lead engineer for a new hovercraft, which contains ECUs for propulsion, steering, sensing, power, and safety systems on a CAN bus. Every day, Steve's engineers test and debug their respective systems through the messages they send and receive. The team has various expensive, bulky, archaic, and/or proprietary software options to filter and log messages, but they still spend a lot of time watching the stream and manually decoding bytes. Or worse, they pull raw data from log files, match up times, and hunt for something meaningful.
+Steve is the lead engineer for a new hovercraft, which contains ECUs for propulsion, steering, sensing, power, and safety systems on a CAN bus. Every day, Steve's engineers test and debug their respective systems through the messages they send and receive. The team has various expensive, bulky, archaic, and/or proprietary software options to filter and log messages, but they still spend a lot of time watching the stream and manually decoding bytes. Or worse, they pull raw data from log files and hunt for something meaningful.
 
-Steve installs Zircon on his laptop, writes a little code, and fires it up. What he instantly gets is a slick web interface to visualize all communications inside his hovercraft, in real-time. What he also gets is a powerful API to query, filter, downsample, aggregate, and export all signals for the past days or weeks. Excited, Steve sets up Zircon on a dedicated computer. His engineers start using the Zircon interface to wirelessly debug their firmware, tune the control gains, and check for voltage spikes. Soon, they create custom diagnostic dashboards, an interactive driver display, and a mobile app that can start the hovercraft by sending messages back to the bus. Productivity soars, and profit is made.
+Steve installs Zircon on his laptop, writes a little code, and fires it up. What he instantly gets is a slick web interface to visualize all communications inside his hovercraft, in real-time. What he also gets is a powerful API to query, filter, downsample, aggregate, and export all signals for the past days or weeks. Excited, Steve sets up Zircon on a dedicated machine. His engineers start using the Zircon interface to wirelessly debug their firmware, tune the control gains, and check for voltage spikes. Soon, they create custom diagnostic dashboards, an interactive driver display, and a mobile app that can start the hovercraft by sending messages back to the bus. Productivity soars, and profit is made.
 
 ## Components
 
@@ -23,6 +23,12 @@ Steve installs Zircon on his laptop, writes a little code, and fires it up. What
 
 ##### Reporter
 Lorem ipsum
+
+    while True:
+        raw_data = tranceiver.read()
+        message = parser.parse(raw_data)
+        if message:
+            publisher.send(message)
 
 ###### Tranceiver
 Lorem ipsum
@@ -35,6 +41,12 @@ Lorem ipsum
 
 ##### Injector
 Lorem ipsum
+
+    while True:
+        message = subscriber.read()
+        data = decoder.decode(message)
+        if data:
+            datastore.insert(data)
 
 ###### Subscriber
 Lorem ipsum
