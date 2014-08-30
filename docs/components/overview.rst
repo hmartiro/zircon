@@ -1,5 +1,3 @@
-Components
-==========
-
+Component Overview
+==================
 Lorem Ipsum
-
