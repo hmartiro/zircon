@@ -19,21 +19,15 @@ Steve installs Zircon on his laptop, writes a little code, and fires it up. What
 
 ## Components
 
-[screenshot]
+![Architecture](diagrams/zircon-architecture.png)
 
 ##### Reporter
 Lorem ipsum
 
-    while True:
-        raw_data = tranceiver.read()
-        message = parser.parse(raw_data)
-        if message:
-            publisher.send(message)
-
 ###### Tranceiver
 Lorem ipsum
 
-###### Parser
+###### Transformer
 Lorem ipsum
 
 ###### Publisher
@@ -42,16 +36,7 @@ Lorem ipsum
 ##### Injector
 Lorem ipsum
 
-    while True:
-        message = subscriber.read()
-        data = decoder.decode(message)
-        if data:
-            datastore.insert(data)
-
 ###### Subscriber
-Lorem ipsum
-
-###### Decoder
 Lorem ipsum
 
 ###### Datastore

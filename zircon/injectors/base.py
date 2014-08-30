@@ -4,6 +4,10 @@
 
 from abc import ABCMeta, abstractmethod
 
+from zircon.transformers.base import Transformer
+from zircon.subscribers.zeromq import ZMQSubscriber
+from zircon.datastores.influx import InfluxDatastore
+
 
 class BaseInjector():
 
@@ -24,13 +28,27 @@ class BaseInjector():
 
 class Injector(BaseInjector):
 
-    def __init__(self, subscriber, decoder, datastore):
+    def __init__(self, subscriber=None, transformers=None, datastore=None):
 
-        self.subscriber = subscriber
-        self.decoder = decoder
-        self.datastore = datastore
+        if subscriber:
+            self.subscriber = subscriber
+        else:
+            self.subscriber = ZMQSubscriber()
 
-        self.decoder.set_callback(self.datastore.insert)
+        if transformers:
+            self.transformers = transformers
+        else:
+            self.transformers = [Transformer()]
+
+        if datastore:
+            self.datastore = datastore
+        else:
+            self.datastore = InfluxDatastore()
+
+        for i in range(len(self.transformers) - 1):
+            self.transformers[i].set_callback(self.transformers[i+1].push)
+
+        self.transformers[-1].set_callback(self.datastore.insert)
 
     def open(self):
         self.subscriber.open()
@@ -40,7 +58,7 @@ class Injector(BaseInjector):
         msg = self.subscriber.receive()
 
         if msg:
-            self.decoder.push(msg)
+            self.transformers[0].push(msg)
 
     def run(self):
 

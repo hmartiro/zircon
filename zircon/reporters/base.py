@@ -4,6 +4,9 @@
 
 from abc import ABCMeta, abstractmethod
 
+from zircon.transformers.base import Transformer
+from zircon.publishers.zeromq import ZMQPublisher
+
 
 class BaseReporter():
 
@@ -24,13 +27,24 @@ class BaseReporter():
 
 class Reporter(BaseReporter):
 
-    def __init__(self, tranceiver, parser, publisher):
+    def __init__(self, tranceiver, transformers=None, publisher=None):
 
         self.tranceiver = tranceiver
-        self.parser = parser
-        self.publisher = publisher
 
-        self.parser.set_callback(self.publisher.send)
+        if transformers:
+            self.transformers = transformers
+        else:
+            self.transformers = [Transformer()]
+
+        if publisher:
+            self.publisher = publisher
+        else:
+            self.publisher = ZMQPublisher()
+
+        for i in range(len(self.transformers) - 1):
+            self.transformers[i].set_callback(self.transformers[i+1].push)
+
+        self.transformers[-1].set_callback(self.publisher.send)
 
     def open(self):
 
@@ -42,7 +56,7 @@ class Reporter(BaseReporter):
         raw_data = self.tranceiver.read()
 
         if raw_data:
-            self.parser.push(raw_data)
+            self.transformers[0].push(raw_data)
 
     def run(self):
 

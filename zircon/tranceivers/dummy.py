@@ -25,4 +25,5 @@ class DummyTranceiver(BaseTranceiver):
         return self.data
 
     def write(self, data):
+        print('[WRITE] {}'.format(data))
         return True
