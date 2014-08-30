@@ -10,6 +10,14 @@ class BaseReporter():
     __metaclass__ = ABCMeta
 
     @abstractmethod
+    def open(self):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def step(self):
+        raise NotImplementedError()
+
+    @abstractmethod
     def run(self):
         raise NotImplementedError()
 
@@ -22,16 +30,23 @@ class Reporter(BaseReporter):
         self.parser = parser
         self.publisher = publisher
 
-    def run(self):
+        self.parser.set_callback(self.publisher.send)
+
+    def open(self):
 
         self.tranceiver.open()
         self.publisher.open()
 
-        self.parser.set_callback(self.publisher.send)
+    def step(self):
+
+        raw_data = self.tranceiver.read()
+
+        if raw_data:
+            self.parser.push(raw_data)
+
+    def run(self):
+
+        self.open()
 
         while True:
-
-            raw_data = self.tranceiver.read()
-
-            if raw_data:
-                self.parser.push(raw_data)
+            self.step()

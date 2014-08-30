@@ -10,6 +10,14 @@ class BaseInjector():
     __metaclass__ = ABCMeta
 
     @abstractmethod
+    def open(self):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def step(self):
+        raise NotImplementedError()
+
+    @abstractmethod
     def run(self):
         raise NotImplementedError()
 
@@ -22,15 +30,21 @@ class Injector(BaseInjector):
         self.decoder = decoder
         self.datastore = datastore
 
-    def run(self):
-
-        self.subscriber.open()
-
         self.decoder.set_callback(self.datastore.insert)
 
+    def open(self):
+        self.subscriber.open()
+
+    def step(self):
+
+        msg = self.subscriber.receive()
+
+        if msg:
+            self.decoder.push(msg)
+
+    def run(self):
+
+        self.open()
+
         while True:
-
-            msg = self.subscriber.read()
-
-            if msg:
-                self.decoder.push(msg)
+            self.step()
