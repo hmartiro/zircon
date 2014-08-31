@@ -17,6 +17,10 @@ Steve is the lead engineer for a new hovercraft, which contains ECUs for propuls
 
 Steve installs Zircon on his laptop, writes a little code, and fires it up. What he instantly gets is a slick web interface to visualize all communications inside his hovercraft, in real-time. What he also gets is a powerful API to query, filter, downsample, aggregate, and export all signals for the past days or weeks. Excited, Steve sets up Zircon on a dedicated machine. His engineers start using the Zircon interface to wirelessly debug their firmware, tune the control gains, and check for voltage spikes. Soon, they create custom diagnostic dashboards, an interactive driver display, and a mobile app that can start the hovercraft by sending messages back to the bus. Productivity soars, and profit is made.
 
+## Documentation
+
+Documentation is located at [zircon.readthedocs.org](http://zircon.readthedocs.org).
+
 ## Components
 
 ![Architecture](diagrams/zircon-architecture.png)
