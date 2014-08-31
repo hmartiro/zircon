@@ -2,30 +2,36 @@
 
 """
 
-from abc import ABCMeta, abstractmethod
-
 from zircon.transformers.base import Transformer
 from zircon.publishers.zeromq import ZMQPublisher
 
 
-class BaseReporter():
+class Reporter():
+    """ A Reporter continuously reads data from a Tranceiver, feeds it through
+    a row of Transformers, and broadcasts the result using a Publisher.
 
-    __metaclass__ = ABCMeta
+    When creating a Reporter, you supply instances of a Tranceiver,
+    one or more Transformers, and a Publisher. If not specified,
+    a pass-through Transformer and the default Publisher are used.
 
-    @abstractmethod
-    def open(self):
-        raise NotImplementedError()
+    **Usage**::
 
-    @abstractmethod
-    def step(self):
-        raise NotImplementedError()
+        reporter = Reporter(
+            tranceiver=MyTranceiver(),
+            transformers=[MyDecoder(), MyCompressor(), ...],
+            publisher=MyPublisher()
+        )
 
-    @abstractmethod
-    def run(self):
-        raise NotImplementedError()
+    A Reporter can be run as its own process::
 
+        reporter.run()
 
-class Reporter(BaseReporter):
+    Or stepped through by an external engine::
+
+        reporter.open()
+        while not done:
+            reporter.step()
+    """
 
     def __init__(self, tranceiver, transformers=None, publisher=None):
 
@@ -47,11 +53,15 @@ class Reporter(BaseReporter):
         self.transformers[-1].set_callback(self.publisher.send)
 
     def open(self):
+        """ Initialize the Tranceiver and Publisher.
+        """
 
         self.tranceiver.open()
         self.publisher.open()
 
     def step(self):
+        """ Read data and feed it into the first Transformer.
+        """
 
         raw_data = self.tranceiver.read()
 
@@ -59,6 +69,8 @@ class Reporter(BaseReporter):
             self.transformers[0].push(raw_data)
 
     def run(self):
+        """ Initialize components and start broadcasting.
+        """
 
         self.open()
 

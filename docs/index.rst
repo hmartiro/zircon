@@ -1,8 +1,5 @@
-..  zircon documentation master file, created by
-    sphinx-quickstart on Sat Aug 30 15:04:17 2014.
-
-Zircon
-======
+Zircon Documentation
+====================
 
 Table of Contents
 -----------------

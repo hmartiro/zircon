@@ -2,18 +2,14 @@ Reporters and Injectors
 =======================
 Lorem ipsum
 
-Reporter Interface
-------------------
-Lorem Ipsum
-
-..  autoclass:: zircon.reporters.base.BaseReporter
+Reporter
+--------
+..  autoclass:: zircon.reporters.base.Reporter
     :members:
     :undoc-members:
 
-Injector Interface
-------------------
-Lorem Ipsum
-
-..  autoclass:: zircon.injectors.base.BaseInjector
+Injector
+--------
+..  autoclass:: zircon.injectors.base.Injector
     :members:
     :undoc-members:

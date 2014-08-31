@@ -2,31 +2,38 @@
 
 """
 
-from abc import ABCMeta, abstractmethod
-
 from zircon.transformers.base import Transformer
 from zircon.subscribers.zeromq import ZMQSubscriber
 from zircon.datastores.influx import InfluxDatastore
 
 
-class BaseInjector():
+class Injector():
+    """ An Injector listens for data from a Reporter, feeds it through a row of
+    Transformers, and inserts the result into a Datastore.
 
-    __metaclass__ = ABCMeta
+    When creating an Injector, you supply instances of a Subscriber,
+    one or more Transformers, and a Datastore. If not specified,
+    a pass-through Transformer and the default Subscriber and Datastore are
+    used.
 
-    @abstractmethod
-    def open(self):
-        raise NotImplementedError()
+    **Usage**::
 
-    @abstractmethod
-    def step(self):
-        raise NotImplementedError()
+        injector = Injector(
+            subscriber=MySubscriber(),
+            transformers=[MyDecompressor(), MyFormatter(), ...],
+            datastore=MyDatastore()
+        )
 
-    @abstractmethod
-    def run(self):
-        raise NotImplementedError()
+    An Injector can be run as its own process::
 
+        injector.run()
 
-class Injector(BaseInjector):
+    Or stepped through by an external engine::
+
+        injector.open()
+        while not done:
+            injector.step()
+    """
 
     def __init__(self, subscriber=None, transformers=None, datastore=None):
 
@@ -51,9 +58,13 @@ class Injector(BaseInjector):
         self.transformers[-1].set_callback(self.datastore.insert)
 
     def open(self):
+        """ Initialize the Subscriber.
+        """
         self.subscriber.open()
 
     def step(self):
+        """ Receive data and feed it into the first Transformer.
+        """
 
         msg = self.subscriber.receive()
 
@@ -61,6 +72,8 @@ class Injector(BaseInjector):
             self.transformers[0].push(msg)
 
     def run(self):
+        """ Initialize components and start listening.
+        """
 
         self.open()
 

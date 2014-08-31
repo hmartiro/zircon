@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -216,7 +217,7 @@ latex_elements = {
 latex_documents = [
     (
         'index', 'zircon.tex',
-        u'zircon Documentation',
+        'zircon Documentation',
         author, 'manual'
     ),
 ]
@@ -247,8 +248,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'zircon', u'zircon Documentation',
-     [author], 1)
+    (
+        'index',
+        'zircon',
+        'zircon Documentation',
+        [author],
+        1
+    )
 ]
 
 # If true, show URL addresses after external links.
@@ -261,9 +267,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'zircon', u'zircon Documentation',
-   author, 'zircon', 'One line description of project.',
-   'Miscellaneous'),
+    (
+        'index',
+        'zircon',
+        'zircon Documentation',
+        author,
+        'zircon',
+        'A framework to capture, store, analyze, and visualize high-speed signals in real-time.',
+        'Miscellaneous'
+    ),
 ]
 
 # Documents to append as an appendix to all manuals.
