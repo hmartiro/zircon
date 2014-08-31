@@ -33,8 +33,4 @@ class ZMQSubscriber(BaseSubscriber):
         return True
 
     def receive(self):
-
-        serialized_msg = self.sock.recv()
-        msg = pickle.loads(serialized_msg)
-
-        return msg
+        return self.sock.recv()

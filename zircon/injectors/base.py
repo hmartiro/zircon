@@ -2,7 +2,7 @@
 
 """
 
-from zircon.transformers.base import Transformer
+from zircon.transformers.common import Unpickler
 from zircon.subscribers.zeromq import ZMQSubscriber
 from zircon.datastores.influx import InfluxDatastore
 
@@ -13,7 +13,7 @@ class Injector():
 
     When creating an Injector, you supply instances of a Subscriber,
     one or more Transformers, and a Datastore. If not specified,
-    a pass-through Transformer and the default Subscriber and Datastore are
+    a pickling Transformer and the default Subscriber and Datastore are
     used.
 
     **Usage**::
@@ -45,7 +45,7 @@ class Injector():
         if transformers:
             self.transformers = transformers
         else:
-            self.transformers = [Transformer()]
+            self.transformers = [Unpickler()]
 
         if datastore:
             self.datastore = datastore

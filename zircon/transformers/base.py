@@ -54,8 +54,15 @@ class Transformer(BaseTransformer):
     def set_callback(self, callback):
         self.callback = callback
 
-    def push(self, msg):
-        """ Invoke the callback every time I get a message.
+    def output(self, msg):
+        """ If I have a callback, invoke it.
         """
         if self.callback:
             self.callback(msg)
+
+    def push(self, msg):
+        """ Output exactly what I receive.
+        """
+        self.output(msg)
+
+

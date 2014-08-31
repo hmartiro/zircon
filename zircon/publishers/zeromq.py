@@ -30,6 +30,10 @@ class ZMQPublisher(BasePublisher):
 
     def send(self, msg):
 
-        serialized_msg = pickle.dumps(msg)
-        self.sock.send(serialized_msg)
+        try:
+            self.sock.send(msg)
+        except TypeError:
+            print('[ERROR] Message fed to Publisher must be serialized!')
+            return False
+
         return True

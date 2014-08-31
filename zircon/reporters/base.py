@@ -2,7 +2,7 @@
 
 """
 
-from zircon.transformers.base import Transformer
+from zircon.transformers.common import Pickler
 from zircon.publishers.zeromq import ZMQPublisher
 
 
@@ -12,7 +12,7 @@ class Reporter():
 
     When creating a Reporter, you supply instances of a Tranceiver,
     one or more Transformers, and a Publisher. If not specified,
-    a pass-through Transformer and the default Publisher are used.
+    an unpickling Transformer and the default Publisher are used.
 
     **Usage**::
 
@@ -40,7 +40,7 @@ class Reporter():
         if transformers:
             self.transformers = transformers
         else:
-            self.transformers = [Transformer()]
+            self.transformers = [Pickler()]
 
         if publisher:
             self.publisher = publisher

@@ -8,7 +8,7 @@ from zircon.datastores.base import BaseDatastore
 class DummyDatastore(BaseDatastore):
 
     def __init__(self):
-        self.callback = None
+        pass
 
     def create_database(self, db_name):
         return True
@@ -22,7 +22,7 @@ class DummyDatastore(BaseDatastore):
     def list_databases(self):
         return []
 
-    def list_signals(self, data):
+    def list_signals(self):
         return []
 
     def delete_signal(self, data):

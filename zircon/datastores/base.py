@@ -112,6 +112,9 @@ class BaseDatastore():
         """ Return a uniformly sampled time series in a given time interval.
         Can  downsample, aggregate, and limit the result.
 
+        Aggregate functions depend on the implementation, but should at least
+        include 'mean', 'first', 'last', 'min', and 'max'.
+
         :param signals: A list of signals.
         :param t0: Start time in microseconds.
         :param t1: End time in microseconds.
