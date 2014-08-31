@@ -1,14 +1,16 @@
 ..  zircon documentation master file, created by
     sphinx-quickstart on Sat Aug 30 15:04:17 2014.
 
-Introduction
-============
+Zircon
+======
 
-Contents:
+Table of Contents
+-----------------
 
 ..  toctree::
     :maxdepth: 2
 
+    introduction
     components/overview
     components/tranceivers
     components/transformers
@@ -17,7 +19,7 @@ Contents:
     components/reporters-injectors
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
