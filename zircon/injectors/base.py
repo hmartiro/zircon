@@ -60,7 +60,11 @@ class Injector():
     def open(self):
         """ Initialize the Subscriber.
         """
-        self.subscriber.open()
+        success = self.subscriber.open()
+        if not success:
+            return False
+
+        return True
 
     def step(self):
         """ Receive data and feed it into the first Transformer.
@@ -68,14 +72,17 @@ class Injector():
 
         msg = self.subscriber.receive()
 
-        if msg:
+        if msg is not None:
             self.transformers[0].push(msg)
 
     def run(self):
         """ Initialize components and start listening.
         """
 
-        self.open()
+        success = self.open()
+        if not success:
+            print('Failed to initialize!')
+            return
 
         while True:
             self.step()

@@ -56,8 +56,15 @@ class Reporter():
         """ Initialize the Tranceiver and Publisher.
         """
 
-        self.tranceiver.open()
-        self.publisher.open()
+        success = self.tranceiver.open()
+        if not success:
+            return False
+
+        success = self.publisher.open()
+        if not success:
+            return False
+
+        return True
 
     def step(self):
         """ Read data and feed it into the first Transformer.
@@ -65,14 +72,17 @@ class Reporter():
 
         raw_data = self.tranceiver.read()
 
-        if raw_data:
+        if raw_data is not None:
             self.transformers[0].push(raw_data)
 
     def run(self):
         """ Initialize components and start broadcasting.
         """
 
-        self.open()
+        success = self.open()
+        if not success:
+            print('Failed to initialize!')
+            return
 
         while True:
             self.step()
