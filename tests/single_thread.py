@@ -8,6 +8,7 @@ from threading import Thread
 from zircon.tranceivers.dummy import DummyTranceiver
 from zircon.publishers.zeromq import ZMQPublisher
 from zircon.subscribers.zeromq import ZMQSubscriber
+from zircon.datastores.influx import InfluxDatastore
 from zircon.datastores.dummy import DummyDatastore
 
 from zircon.reporters.base import Reporter
@@ -22,10 +23,13 @@ def launch_reporter_thread():
 
         reporter = Reporter(
             tranceiver=DummyTranceiver(
-                data=range(10),
-                dt=0.3
+                dt=0.0005
             ),
-            transformers=[Combiner(2), Pickler(), Compressor()],
+            transformers=[
+                TimedCombiner(dt=0.1),
+                Pickler(),
+                Compressor()
+            ],
             publisher=ZMQPublisher()
         )
         reporter.run()
@@ -41,8 +45,12 @@ def launch_injector_thread():
 
         injector = Injector(
             subscriber=ZMQSubscriber(),
-            transformers=[Decompressor(), Unpickler()],
-            datastore=DummyDatastore()
+            transformers=[
+                Decompressor(),
+                Unpickler(),
+                #InsertFormatter()
+            ],
+            datastore=InfluxDatastore()
         )
         injector.run()
 
