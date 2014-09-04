@@ -24,6 +24,8 @@ class ZMQSubscriber(BaseSubscriber):
         if self.zmq_type == zmq.SUB:
             self.sock.setsockopt(zmq.SUBSCRIBE, '')
 
+        self.count = 0
+
     def open(self):
         self.sock.connect(self.URI)
         return True
@@ -33,4 +35,7 @@ class ZMQSubscriber(BaseSubscriber):
         return True
 
     def receive(self):
-        return self.sock.recv()
+        msg = self.sock.recv()
+        self.count += 1
+        print('[RECV] {}'.format(self.count))
+        return msg

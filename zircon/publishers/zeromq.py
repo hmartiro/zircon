@@ -20,6 +20,8 @@ class ZMQPublisher(BasePublisher):
         self.context = zmq.Context()
         self.sock = self.context.socket(self.zmq_type)
 
+        self.count = 0
+
     def open(self):
         self.sock.bind(self.URI)
         return True
@@ -32,6 +34,8 @@ class ZMQPublisher(BasePublisher):
 
         try:
             self.sock.send(msg)
+            self.count += 1
+            print('[SENT] {}'.format(self.count))
         except TypeError:
             print('[ERROR] Message fed to Publisher must be serialized!')
             return False
