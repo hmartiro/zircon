@@ -273,7 +273,8 @@ texinfo_documents = [
         'zircon Documentation',
         author,
         'zircon',
-        'A framework to capture, store, analyze, and visualize high-speed signals in real-time.',
+        'A framework to capture, store, analyze, and visualize high-speed '
+        'signals in real-time.',
         'Miscellaneous'
     ),
 ]
@@ -289,3 +290,7 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# -- Other configuration options ------------------------------------------
+
+autodoc_member_order = 'bysource'
