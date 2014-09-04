@@ -109,6 +109,14 @@ body {
     color: red;
 }
 
+.navbar-brand {
+    padding-top: 20px;
+}
+.navbar-brand-text {
+    font-size: 29px;
+    color: #eee;
+}
+
 /* Centered title in navbar */
 
 .navbar-center h1 {
