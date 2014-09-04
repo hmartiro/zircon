@@ -9,7 +9,7 @@ Table of Contents
 
     introduction
     components/overview
-    components/tranceivers
+    components/transceivers
     components/transformers
     components/publishers-subscribers
     components/datastores

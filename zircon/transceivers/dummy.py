@@ -5,10 +5,10 @@
 import time
 import random
 
-from zircon.tranceivers.base import BaseTranceiver
+from zircon.transceivers.base import BaseTransceiver
 
 
-class DummyTranceiver(BaseTranceiver):
+class DummyTransceiver(BaseTransceiver):
 
     def __init__(self, signal_name='dummy', data_gen=None, dt=0.5):
 

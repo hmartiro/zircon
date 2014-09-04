@@ -2,14 +2,14 @@
 
 """
 
-from zircon.tranceivers.dummy import DummyTranceiver
+from zircon.transceivers.dummy import DummyTransceiver
 from zircon.publishers.zeromq import ZMQPublisher
 from zircon.reporters.base import Reporter
 
 from zircon.transformers.common import *
 
 reporter = Reporter(
-    tranceiver=DummyTranceiver(
+    transceiver=DummyTransceiver(
         signal_name='dummy',
         dt=1/2000.
     ),

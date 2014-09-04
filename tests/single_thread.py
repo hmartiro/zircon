@@ -2,10 +2,9 @@
 
 """
 
-import time
 from threading import Thread
 
-from zircon.tranceivers.dummy import DummyTranceiver
+from zircon.transceivers.dummy import DummyTransceiver
 from zircon.publishers.zeromq import ZMQPublisher
 from zircon.subscribers.zeromq import ZMQSubscriber
 from zircon.datastores.influx import InfluxDatastore
@@ -22,7 +21,7 @@ def launch_reporter_thread():
     def run_reporter():
 
         reporter = Reporter(
-            tranceiver=DummyTranceiver(
+            transceiver=DummyTransceiver(
                 dt=0.0005
             ),
             transformers=[

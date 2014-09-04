@@ -5,16 +5,16 @@
 from abc import ABCMeta, abstractmethod
 
 
-class BaseTranceiver():
-    """ Abstract base class defining the Tranceiver interface.
+class BaseTransceiver():
+    """ Abstract base class defining the Transceiver interface.
 
-    A Tranceiver reads and/or writes to some source. It is the lowest-level
+    A Transceiver reads and/or writes to some source. It is the lowest-level
     component in zircon, which would for example interface with a CAN bus,
     serial port, or XBee.
 
     **Usage**::
 
-        t = MyTranceiver()
+        t = MyTransceiver()
         t.open()
 
         while not done:

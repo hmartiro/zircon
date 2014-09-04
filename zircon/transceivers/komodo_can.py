@@ -4,12 +4,12 @@
 
 from komodo_py import *
 
-from zircon.tranceivers.base import BaseTranceiver
+from zircon.transceivers.base import BaseTransceiver
 
 import sys
 
 
-class KomodoTranceiver(BaseTranceiver):
+class KomodoTransceiver(BaseTransceiver):
 
     MAX_PKT_SIZE = 8
     NUM_GPIOS = 8
