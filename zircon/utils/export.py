@@ -5,14 +5,16 @@
 import csv
 import argparse
 
-from zircon.datastores.influx import InfluxDatastore
-
 
 class DataExporter():
 
-    def __init__(self):
+    def __init__(self, datastore=None):
 
-        self.db = InfluxDatastore()
+        if not datastore:
+            from zircon.datastores.influx import InfluxDatastore
+            datastore = InfluxDatastore()
+
+        self.db = datastore
 
     def export_csv(self, signals, t0, t1, dt, aggregate='first', limit=0):
 
