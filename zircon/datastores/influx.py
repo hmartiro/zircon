@@ -10,32 +10,34 @@ from zircon.datastores.base import BaseDatastore
 
 class InfluxDatastore(BaseDatastore):
 
-    # Try default database if none provided
+    # Try default database configuration if none provided
     DEFAULT_DB_INFO = {
         'host': 'localhost',
         'port': 8086,
-        'user': 'root',
-        'pwd': 'root',
-        'db_name': 'test'
+        'username': 'root',
+        'password': 'root'
     }
 
-    def __init__(self, db_info=None):
+    DEFAULT_DB_NAME = 'zircon'
+
+    def __init__(self, db_info=None, db_name=None):
 
         self.db_info = db_info or self.DEFAULT_DB_INFO
+        self.db_name = db_name or self.DEFAULT_DB_NAME
 
         self.db = influxdb.InfluxDBClient(
             host=self.db_info['host'],
             port=self.db_info['port'],
-            username=self.db_info['user'],
-            password=self.db_info['pwd']
+            username=self.db_info['username'],
+            password=self.db_info['password']
         )
-
-        self.db_name = self.db_info['db_name']
 
         if self.db_name not in self.list_databases():
             self.create_database(self.db_name)
 
         self.switch_database(self.db_name)
+
+        print('Using InfluxDB datastore with db name {}'.format(self.db_name))
 
     def create_database(self, db_name):
         self.db.create_database(db_name)
@@ -47,6 +49,9 @@ class InfluxDatastore(BaseDatastore):
         self.db_name = db_name
         self.db.switch_db(db_name)
         return True
+
+    def get_database_name(self):
+        return self.db_name
 
     def list_databases(self):
         return [d['name'] for d in self.db.get_database_list()]
@@ -81,8 +86,6 @@ class InfluxDatastore(BaseDatastore):
             'columns': ['time', 'val'],
             'points': points
         } for signal_name, points in data.items()]
-
-        #print('[INSERT] {}'.format(insert_data))
 
         now = time.time()
 
