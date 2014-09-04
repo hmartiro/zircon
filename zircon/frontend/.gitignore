@@ -1,0 +1,4 @@
+# .gitignore for zircon frontend
+
+*.sqlite3
+components/

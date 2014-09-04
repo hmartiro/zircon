@@ -1,0 +1,21 @@
+{% extends 'bootstrap3/bootstrap3.html' %}
+
+{% load bootstrap3 %}
+{% load static %}
+
+{% block bootstrap3_extra_head %}
+<link rel="shortcut icon" href="{% static 'dashboard/img/favicon.ico' %}" type="image/x-icon"/>
+{% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block bootstrap3_title %}
+{% block title %}C1 Diagnostics{% endblock %}
+{% endblock %}
+
+{% block bootstrap3_content %}
+{% block content %}{% endblock %}
+{% endblock %}
+
+{% block bootstrap3_extra_script %}
+{% block extra_script %}{% endblock %}
+{% endblock %}

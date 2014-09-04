@@ -1,0 +1,193 @@
+{% verbatim %}
+<div class="scope-container col-md-6" id="scope-container-{{ scope_id }}">
+
+  <div class="row">
+
+    <div class="btn-group col-md-6 col-sm-6 col-xs-6">
+
+      <!-- Button trigger modal -->
+      <button class="btn btn-icon btn-default add-signal-button" data-toggle="modal"
+                        data-target="#scope-container-{{ scope_id }} .add-signal-modal">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+
+      <button class="btn btn-icon btn-md btn-default remove-signal-button" data-toggle="modal"
+                        data-target="#scope-container-{{ scope_id }} .remove-signal-modal">
+        <span class="glyphicon glyphicon-minus"></span>
+      </button>
+
+      <button class="btn btn-icon btn-md btn-default set-range-button" data-toggle="modal"
+                        data-target="#scope-container-{{ scope_id }} .set-range-modal">
+        <span class="glyphicon glyphicon-resize-vertical"></span>
+      </button>
+
+      <button class="btn btn-icon btn-md btn-default remove-scope-button" data-toggle="modal"
+                        data-target="#scope-container-{{ scope_id }} .remove-scope-modal">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+
+    </div>
+
+    <div class="scope-title-container col-md-6 col-sm-6 col-xs-6">
+      <h4 class="scope-title">Scope {{ scope_id }}</h4>
+    </div>
+
+  </div>
+
+  <div class="nvd3-container row"></div>
+
+  <!-- Modal -->
+  <div class="modal add-signal-modal" tabindex="-1"
+       role="dialog" aria-labelledby="add-signal-modal-{{ scope_id }}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Add signal to scope {{ scope_id }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <h5 class="col-md-2">Signal ID</h5>
+            <select class="selectpicker show-tick col-md-10 signal-select"
+                    data-style="btn-default" data-live-search="true">
+              {{#each signal_ids}}
+                <option>{{ this }}</option>
+              {{/each}}
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-primary col-md-3
+                         confirm-add-signal-button">
+            Add
+          </button>
+          <button type="button" class="btn btn-modal btn-default col-md-3
+                        cancel-add-signal-button" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- modal -->
+
+  <!-- Modal -->
+  <div class="modal remove-signal-modal" tabindex="-1"
+       role="dialog" aria-labelledby="remove-signal-modal-{{ scope_id }}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Remove signal from scope {{ scope_id }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <h5 class="col-md-2">Signal</h5>
+            <select class="selectpicker show-tick col-md-10 remove-signal-select"
+                    data-style="btn-default" data-live-search="true">
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-danger col-md-3
+                         confirm-remove-signal-button">
+            Remove
+          </button>
+          <button type="button" class="btn btn-modal btn-default col-md-3
+                        cancel-remove-signal-button" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- modal -->
+  
+  <!-- Modal to set range -->
+  <div class="modal set-range-modal" tabindex="-1"
+       role="dialog" aria-labelledby="set-range-modal-{{ scope_id }}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Set range of scope {{ scope_id }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="row">
+              <span class="error-text col-md-12">Invalid values for range!</span>
+            </div>
+            <div class="row">
+              <label for="y-min-field-{{ scope_id }}" class="col-md-2 control-label">Y-min:</label>
+              <div class="col-md-3">
+                <input type="text" class="form-control y-min-field" id="y-min-field-{{ scope_id }}" placeholder="">
+              </div>
+            </div>
+            <div class="row">
+              <label for="y-max-field-{{ scope_id }}" class="col-md-2 control-label">Y-max:</label>
+              <div class="col-md-3">
+                <input type="text" class="form-control y-max-field" id="y-max-field-{{ scope_id }}" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-danger col-md-3
+                         confirm-set-range-button">
+            Set Range
+          </button>
+          <button type="button" class="btn btn-modal btn-default col-md-3
+                        cancel-set-range-button" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- modal -->
+  
+  <!-- Modal -->
+  <div class="modal remove-scope-modal" tabindex="-1"
+       role="dialog" aria-labelledby="remove-scope-modal-{{ scope_id }}" aria-hidden="true">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Remove Scope {{ scope_id }}</h4>
+        </div>
+
+        <div class="modal-body">
+          Are you sure you want to remove this scope?
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-danger col-md-3
+                         col-md-offset-9 confirm-remove-scope-button">
+            Yes
+          </button>
+          <button type="button" class="btn btn-modal btn-default col-md-3
+                        cancel-remove-scope-button" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div> <!-- modal -->
+
+</div>
+{% endverbatim %}

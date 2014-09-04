@@ -1,0 +1,137 @@
+{% extends 'dashboard/base_index.html' %}
+
+{% load bootstrap3 %}
+{% load static %}
+
+(# ------------------------------------------- #)
+
+{% block title %} Zircon - Real-time Dashboard {% endblock %}
+
+(# ------------------------------------------- #)
+
+{% block dash_extra_head %}
+
+<link rel="stylesheet" href="{% static 'nvd3/src/nv.d3.css' %}" type="text/css" />
+
+<script>
+  signal_ids = JSON.parse('{{ signal_ids | safe }}');
+</script>
+
+<script id="data-scope-template" type="text/x-handlebars-template">
+  {% include 'dashboard/data-scope.html' %}
+</script>
+
+{% endblock %}
+
+(# ------------------------------------------- #)
+
+{% block dash_navbar %}
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <span class="navbar-brand">
+        <!--<img src="{% static 'dashboard/img/logo.svg' %}" alt="Zircon" id="logo" />-->
+      </span>
+
+    </div>
+
+    <div class="nav navbar-nav navbar-center">
+      <h1>Real-time Dashboard</h1>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <div class="btn-group">
+            <button class="btn btn-icon btn-md btn-default btn-force-radius pause-all-button">
+              <span class="glyphicon glyphicon-pause"></span>
+            </button>
+
+            <button class="btn btn-icon btn-md btn-success btn-force-radius resume-all-button">
+              <span class="glyphicon glyphicon-play"></span>
+            </button>
+          </div>
+        </li>
+        <li>
+          <div class="btn-group">
+            <button class="btn btn-icon btn-md btn-default add-scope-button" data-toggle="modal"
+                        data-target=".add-scope-modal">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+        </li>
+        {% comment %}
+        <li><a href="/">Dashboard</a></li>
+        <li class="divider"></li>
+        <li><a href="/admin/">Admin</a></li>
+        {% endcomment %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block dash_content %}
+
+<div class="scopes_row row">
+</div>
+
+<!-- Add Scope Modal -->
+<div class="modal add-scope-modal" tabindex="-1"
+     role="dialog" aria-labelledby="add-scope-modal" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">Add Scope</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="add-scope-field" class="col-sm-3 control-label">Scope name:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="add-scope-field" placeholder="scope_name">
+
+           </div>
+         </div>
+       </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-modal btn-success col-md-3
+                       col-md-offset-9 confirm-add-scope-button">
+          Add
+        </button>
+        <button type="button" class="btn btn-modal btn-default col-md-3
+                      cancel-add-scope-button" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+
+     </div>
+   </div>
+</div> <!-- modal -->
+{% endblock %}
+
+(# ------------------------------------------- #)
+
+{% block dash_extra_script %}
+  <script type="text/javascript" src="{% static 'd3/d3.js' %}"></script>
+  <script type="text/javascript" src="{% static 'nvd3/nv.d3.js' %}"></script>
+  <script type="text/javascript" src="{% static 'dashboard/js/datascope.js' %}"></script>
+  <script type="text/javascript" src="{% static 'dashboard/js/dash.js' %}"></script>
+{% endblock %}
