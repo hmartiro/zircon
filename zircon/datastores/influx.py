@@ -110,8 +110,14 @@ class InfluxDatastore(BaseDatastore):
 
     def get_last_points(self, signals, num=1):
 
+        all_signals = self.list_signals()
+        query_signals = [s for s in signals if s in all_signals]
+
+        if not query_signals:
+            return {}
+
         query_str = 'select * from {} limit {}'.format(
-            ', '.join(['{}'.format(s) for s in signals]),
+            ', '.join(['{}'.format(s) for s in query_signals]),
             num
         )
 
@@ -127,10 +133,16 @@ class InfluxDatastore(BaseDatastore):
     def get_timeseries(self, signals, t0, t1,
                        dt=100000, aggregate='last', limit=1000):
 
+        all_signals = self.list_signals()
+        query_signals = [s for s in signals if s in all_signals]
+
+        if not query_signals:
+            return {}
+
         q = 'select {}(val) from {} where time > {}u and time < {}u ' \
             'group by time({}u) limit {}'.format(
                 aggregate,
-                ', '.join(signals),
+                ', '.join(query_signals),
                 int(t0),
                 int(t1),
                 int(dt),
