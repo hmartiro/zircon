@@ -2,7 +2,7 @@
 
 """
 
-from komodo_py import *
+from zircon.external.komodo.komodo_py import *
 
 from zircon.transceivers.base import BaseTransceiver
 
