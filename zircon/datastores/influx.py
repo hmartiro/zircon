@@ -61,7 +61,7 @@ class InfluxDatastore(BaseDatastore):
         r = self.db.query('list series')
 
         try:
-            return [s['name'] for s in r]
+            return [s[1] for s in r[0]['points']]
         except(IndexError, KeyError):
             return None
 
