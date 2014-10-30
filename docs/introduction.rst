@@ -1,6 +1,13 @@
 Introduction to Zircon
 ======================
 
+Zircon is a lightweight framework to intercept, store, analyze, and visualize
+high-speed signals in real-time using modern technologies. High-speed means
+thousands of messages per second and real-time means a latency of milliseconds
+to tens of milliseconds.
+
+.. image:: ../diagrams/dash_screenshot.png
+
 Purpose
 -------
 

@@ -6,7 +6,10 @@ high-speed signals in real-time using modern technologies. High-speed means
 thousands of messages per second and real-time means a latency of milliseconds
 to tens of milliseconds.
 
-[Screenshot]
+Documentation is located at
+[zircon.readthedocs.org](http://zircon.readthedocs.org).
+
+![Dashboard](diagrams/dash_screenshot.png)
 
 ## Purpose
 
@@ -45,11 +48,6 @@ diagnostic dashboards, an interactive driver display, and a mobile app that
 can start the hovercraft by sending messages back to the bus. Productivity
 soars, and profit is made.
 
-## Documentation
-
-Documentation is located at
-[zircon.readthedocs.org](http://zircon.readthedocs.org).
-
-## Components
+## Architecture Diagram
 
 ![Architecture](diagrams/zircon-architecture.png)

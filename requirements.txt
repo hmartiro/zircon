@@ -1,3 +1,8 @@
 pyzmq==14.3.1
 influxdb==0.1.12
 -r zircon/frontend/requirements.txt
+
+# For testing
+Pympler==0.3.1
+psutil==2.1.3
+

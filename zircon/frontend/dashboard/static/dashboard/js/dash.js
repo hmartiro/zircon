@@ -15,7 +15,7 @@ $(function() {
     var t_offset = undefined;
 
     // How often to request data (ms)
-    var data_frametime = 100;
+    var data_frametime = 50;
 
     // How often to update the view (ms)
     var view_frametime = 50;
@@ -115,7 +115,7 @@ $(function() {
 
         var request = {
             signals: series,
-            t0: (get_time() - data_frametime * 2) * 1e3,
+            t0: (get_time() - data_frametime * 3) * 1e3,
             t1: (get_time() + 1000) * 1e3,
             dt: dt * 1e3,
             aggregate: 'last',
