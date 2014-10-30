@@ -12,7 +12,7 @@ class Reporter():
 
     When creating a Reporter, you supply instances of a Transceiver,
     one or more Transformers, and a Publisher. If not specified,
-    an unpickling Transformer and the default Publisher are used.
+    a pickling Transformer and the default Publisher are used.
 
     **Usage**::
 

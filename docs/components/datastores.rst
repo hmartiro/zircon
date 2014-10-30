@@ -1,6 +1,7 @@
 Datastores
 ==========
-Lorem ipsum
+
+..  _datastore:
 
 Datastore Interface
 -------------------

@@ -13,7 +13,7 @@ class Injector():
 
     When creating an Injector, you supply instances of a Subscriber,
     one or more Transformers, and a Datastore. If not specified,
-    a pickling Transformer and the default Subscriber and Datastore are
+    an unpickling Transformer and the default Subscriber and Datastore are
     used.
 
     **Usage**::

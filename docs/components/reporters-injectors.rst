@@ -1,12 +1,15 @@
 Reporters and Injectors
 =======================
-Lorem ipsum
+
+..  _reporter:
 
 Reporter
 --------
 ..  autoclass:: zircon.reporters.base.Reporter
     :members:
     :undoc-members:
+
+..  _injector:
 
 Injector
 --------

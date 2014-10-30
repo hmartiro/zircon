@@ -1,12 +1,15 @@
 Publishers and Subscribers
 ==========================
-Lorem ipsum
+
+..  _publisher:
 
 Publisher Interface
 -------------------
 ..  autoclass:: zircon.publishers.base.BasePublisher
     :members:
     :undoc-members:
+
+..  _subscriber:
 
 Subscriber Interface
 --------------------

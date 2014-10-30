@@ -1,6 +1,7 @@
 Transceivers
 ============
-Lorem ipsum
+
+..  _transceiver:
 
 Transceiver Interface
 ---------------------
