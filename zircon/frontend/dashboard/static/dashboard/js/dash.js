@@ -15,7 +15,7 @@ $(function() {
     var t_offset = undefined;
 
     // How often to request data (ms)
-    var data_frametime = 50;
+    var data_frametime = 100;
 
     // How often to update the view (ms)
     var view_frametime = 50;

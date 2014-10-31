@@ -8,7 +8,6 @@ from zircon.transceivers.dummy import DummyTransceiver
 from zircon.publishers.zeromq import ZMQPublisher
 from zircon.subscribers.zeromq import ZMQSubscriber
 from zircon.datastores.influx import InfluxDatastore
-from zircon.datastores.dummy import DummyDatastore
 
 from zircon.reporters.base import Reporter
 from zircon.injectors.base import Injector

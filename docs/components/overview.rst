@@ -1,11 +1,13 @@
+..  _overview:
+
 Overview of Components
 ======================
+
 Zircon consists of pluggable components useful individually or as a full stack
 for decoding and logging, structured querying and analysis, real-time
-visualization, and integration into custom applications. Each component's
-interface is defined by an abstract base class. Components are connected
-together to achieve a wide range of processing tasks in centralized or
-distributed scenarios.
+visualization, and integration into custom applications. Components are connected
+together to achieve a flexible data pipeline in centralized and distributed
+scenarios.
 
 .. image:: ../../diagrams/zircon-architecture.png
 
@@ -41,3 +43,18 @@ distributed scenarios.
 :ref:`Injector <injector>`
   An Injector listens for data from a Reporter, feeds it through a row of
   Transformers, and inserts the result into a Datastore.
+
+:ref:`Server <server>`
+  Zircon's backend server provides a Socket.IO interface to query information
+  from a Datastore. It allows real-time bidirectional event-based communication
+  between a client application that receives data and the Datastore. Works for
+  web or native applications, on any platform. Allows powerful querying of
+  every recorded data point, by default for the past week.
+
+:ref:`Client <client>`
+  A client is anyone who wants to access the data coming from Transceivers. It is
+  the end goal of Zircon to provide a fast, robust, and easy way for clients to
+  monitor the signals they are interested in. Clients can be web apps, mobile
+  apps, native apps, or hardware systems. Zircon's default client is a web dashboard
+  that allows real-time visualization of arbitrary signals. It is a Django application
+  with a JavaScript interface to the Socket.IO connection.

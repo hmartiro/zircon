@@ -5,7 +5,6 @@
 from zircon.transceivers.dummy_multiple import DummyMultipleTransceiver
 from zircon.publishers.zeromq import ZMQPublisher
 from zircon.reporters.base import Reporter
-
 from zircon.transformers.common import *
 
 from math import sin, pi

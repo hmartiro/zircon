@@ -20,6 +20,8 @@ class DummyMultipleTransceiver(BaseTransceiver):
         if not self.signals:
             self.signals = {'sin': math.sin}
 
+        self.time = time.time()
+
     def open(self):
         return True
 
@@ -28,10 +30,15 @@ class DummyMultipleTransceiver(BaseTransceiver):
 
     def read(self):
 
-        time.sleep(self.dt)
         now = time.time()
-        self.t += now - self.t_real
-        self.t_real = now
+        dt_real = now - self.time - self.dt
+        to_wait = max(min(self.dt - dt_real, self.dt), 0)
+
+        # Update sample time
+        self.t += now - self.time
+
+        self.time = now
+        time.sleep(to_wait)
 
         timestamp = int(now * 1e6)
         data = [(timestamp, name, func(self.t)) for name, func in self.signals.items()]

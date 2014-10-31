@@ -122,7 +122,6 @@ class TimedCombiner(Transformer):
         self.last_saved = time.time()
 
     def push(self, msg):
-
         signal_name = msg[1]
         if signal_name not in self.data_to_save:
             self.data_to_save[signal_name] = []

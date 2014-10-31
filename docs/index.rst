@@ -13,16 +13,17 @@ Table of Contents
     :maxdepth: 2
 
     introduction
+    getting-started
     components/overview
     components/transceivers
     components/transformers
     components/publishers-subscribers
     components/datastores
     components/reporters-injectors
+    components/server
+    components/client
 
-Indices and tables
-------------------
+Index
+-----
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
